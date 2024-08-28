@@ -17,7 +17,7 @@ app.use(express.json());
 // Middleware to handle Cross-Origin Resource Sharing (CORS)
 app.use(cors({
     credentials: true,  // Allow credentials (cookies, authorization headers) to be sent
-    origin: 'http://localhost:5173/',  // Allow requests from this origin
+    origin: 'http://localhost:5173',  // Allow requests from this origin
 }))
 
 // Route to handle user sign-in
