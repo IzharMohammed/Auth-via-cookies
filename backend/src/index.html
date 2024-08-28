@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="username" placeholder="username" />
+    <input type="password" id="password" placeholder="password" />
+    <button id="loginButton">submit</button>
+    <button id="logoutButton">Logout</button>
+    <div id="userData"></div>
+    <script>
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", async () => {
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          try {
+            await axios.post("/signin", {
+              username,
+              password,
+            });
+            alert("You are logged in!!!");
+          } catch (error) {
+            console.log("Login failed", error);
+            alert("Login failed");
+          }
+        });
+
+      document.getElementById("logoutButton").addEventListener("click", () => {
+        axios
+          .post("/logout")
+          .then(() => {
+            console.log("Logged out successsfully!!!");
+          })
+          .catch((error) => {
+            console.error("Logout failed:", error);
+          });
+      });
+
+      function fetchUserData() {
+        axios
+          .get("user")
+          .then((response) => {
+            const userData = response.data;
+            const userDataDiv = document.getElementById("userData");
+            userDataDiv.innerHTML = `<p> your id is : ${userData.userId}</p>`;
+          })
+          .catch((error) => {
+            console.error("Failed to fetch user data:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

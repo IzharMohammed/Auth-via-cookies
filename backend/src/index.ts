@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import path from 'path';
 
 // Secret key for JWT signing
 const jwt_secret = 'secret';
@@ -63,6 +64,10 @@ app.post('/logout', (req, res) => {
     res.json({
         message: "successfully logged out!!!"
     })
+})
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../src/index.html"))
 })
 
 // Start the server on port 3000

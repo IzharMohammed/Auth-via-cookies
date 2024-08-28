@@ -7,6 +7,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const path_1 = __importDefault(require("path"));
 // Secret key for JWT signing
 const jwt_secret = 'secret';
 const app = (0, express_1.default)();
@@ -52,6 +53,9 @@ app.post('/logout', (req, res) => {
     res.json({
         message: "successfully logged out!!!"
     });
+});
+app.get("/", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../src/index.html"));
 });
 // Start the server on port 3000
 app.listen(3000, () => {
